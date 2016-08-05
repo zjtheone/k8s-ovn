@@ -1,0 +1,4 @@
+/usr/bin/kube-apiserver --logtostderr=false --alsologtostderr=false --v=8 --etcd-servers=http://127.0.0.1:2379 --address=0.0.0.0 --port=8080 --kubelet-port=10250 --allow-privileged=false --service-cluster-ip-range=10.254.0.0/16 --admission-control=NamespaceLifecycle,NamespaceExists,LimitRanger,SecurityContextDeny,ResourceQuota --v=0 --log-dir=/var/log/kubernetes
+/usr/bin/kube-controller-manager --logtostderr=false --alsologtostderr=false --v=8 --master=http://192.168.213.142:8080
+/usr/bin/kube-scheduler --logtostderr=false --alsologtostderr=false --v=8 --master=http://192.168.213.142:8080
+/usr/bin/kubelet --logtostderr=false --alsologtostderr=false --v=8 --api-servers=http://192.168.213.142:8080 --address=0.0.0.0 --hostname-override=192.168.213.142 --allow-privileged=false --pod-infra-container-image=registry.access.redhat.com/rhel7/pod-infrastructure:latest --cluster-dns=192.168.213.142
