@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+  labels:
+    app: web
+    clusterId: aabb-ccdd
+  annotations:
+    disk: '25G'
+spec:
+  containers:
+    - name: busybox
+      image: docker.io/busybox:latest
+      command: ['sleep', '36000000']
+      volumeMounts:
+        - name: export
+          mountPath: "/export"
+          readOnly: false
+  volumes:
+    - name: export
+      hostPath:
+        path: "/export/busybox"
+

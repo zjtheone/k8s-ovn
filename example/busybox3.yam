@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox3
+  labels:
+    app: web
+spec:
+  containers:
+    - name: busybox
+      image: docker.io/busybox:latest
+      command: ['sleep', '3600000000']
+      resources:
+        limits:
+          cpu: 250m
+          memory: 128Mi
+ 

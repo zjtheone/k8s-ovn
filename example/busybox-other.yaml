@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox2
+  labels:
+    app: web
+  annotations:
+    disk: '25G'
+spec:
+  containers:
+    - name: busybox2
+      image: docker.io/busybox:latest
+      command: ['sleep', '36000000']
+      volumeMounts:
+        - name: export
+          mountPath: "/export"
+          readOnly: false
+  volumes:
+    - name: export
+      hostPath:
+        path: "/export/busybox2"
+

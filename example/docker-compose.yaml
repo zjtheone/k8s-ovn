@@ -1,0 +1,12 @@
+ipam:
+  image: pierrecdn/phpipam
+  ports:
+   - "80:80"
+  links:
+   - phpipam-mysql
+phpipam-mysql:
+  image: mysql:5.6
+  environment: 
+   - MYSQL_ROOT_PASSWORD=my-secret-pw
+  volumes:
+   - /my_dir/phpipam:/var/lib/mysql
