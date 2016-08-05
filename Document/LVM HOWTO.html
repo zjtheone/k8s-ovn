@@ -1,0 +1,1088 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>LVM HOWTO</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
+REL="NEXT"
+TITLE=" Introduction "
+HREF="intro.html"></HEAD
+><BODY
+CLASS="book"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="BOOK"
+><A
+NAME="AEN1"
+></A
+><DIV
+CLASS="TITLEPAGE"
+><H1
+CLASS="title"
+><A
+NAME="AEN2"
+></A
+>LVM HOWTO</H1
+><H3
+CLASS="author"
+><A
+NAME="AEN4"
+></A
+>AJ Lewis</H3
+><DIV
+CLASS="affiliation"
+><DIV
+CLASS="address"
+><P
+CLASS="address"
+><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<TT
+CLASS="email"
+>&#60;<A
+HREF="mailto:alewis(at)rackable.com"
+>alewis(at)rackable.com</A
+>&#62;</TT
+><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P
+></DIV
+></DIV
+><P
+CLASS="copyright"
+><A
+HREF="ln124.html"
+>Copyright</A
+> &copy; 2002-2003 Sistina Software, Inc</P
+><P
+CLASS="copyright"
+><A
+HREF="ln124.html"
+>Copyright</A
+> &copy; 2004-2005 Red Hat, Inc</P
+><P
+CLASS="copyright"
+><A
+HREF="ln124.html"
+>Copyright</A
+> &copy; 2005-2006 Terrascale Technologies, Inc</P
+><P
+CLASS="copyright"
+><A
+HREF="ln124.html"
+>Copyright</A
+> &copy; 2006 Rackable Systems, Inc</P
+><DIV
+CLASS="revhistory"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+><TR
+><TH
+ALIGN="LEFT"
+VALIGN="TOP"
+COLSPAN="3"
+><B
+>Revision History</B
+></TH
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 0.19</TD
+><TD
+ALIGN="LEFT"
+>2006-11-27</TD
+><TD
+ALIGN="LEFT"
+>Revised by: ajl</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Clarified full snapshot conditions in <A
+HREF="snapshotintro.html"
+><A
+HREF="snapshotintro.html"
+>Section 3.8</A
+></A
+> and <A
+HREF="snapshots_backup.html#snapbackcreate"
+><A
+HREF="snapshots_backup.html#snapbackcreate"
+>Section 13.4.1</A
+></A
+> and added a note about resizing the origin of a snapshot;
+          Fixed Rackable copyright;
+          Fixed e-mail address</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 0.18</TD
+><TD
+ALIGN="LEFT"
+>2006-11-27</TD
+><TD
+ALIGN="LEFT"
+>Revised by: ajl</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Clarify whole disk usage in <A
+HREF="initdisks.html"
+><A
+HREF="initdisks.html"
+>Section 11.1</A
+></A
+>;
+          Updated copyright;
+          Updated e-mail address</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 0.17</TD
+><TD
+ALIGN="LEFT"
+>2005-10-03</TD
+><TD
+ALIGN="LEFT"
+>Revised by: ajl</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Added FAQ entry for max size of LVs in LVM2;
+          Did some cleanup of "Recover physical volume metadata" section;
+	  Updated e-mail address</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 0.16</TD
+><TD
+ALIGN="LEFT"
+>2005-07-15</TD
+><TD
+ALIGN="LEFT"
+>Revised by: ajl</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Added lvm2 boot-time scripts info;
+          Added "Recover physical volume metadata" section - thanks to
+          Maximilian Attems for the patch</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 0.15</TD
+><TD
+ALIGN="LEFT"
+>2005-06-09</TD
+><TD
+ALIGN="LEFT"
+>Revised by: ajl</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Removed references to xfs_freeze - it is no longer needed;
+          Updated snapshots subsection in Anatomy of LVM section;
+          Added a couple entries to the LVM2 FAQ;
+          Fixed a couple typos</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 0.14</TD
+><TD
+ALIGN="LEFT"
+>2004-10-06</TD
+><TD
+ALIGN="LEFT"
+>Revised by: ajl</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Added reference to lvm2_createinitrd in source tree;
+          Adjusted lvcreate example slightly; Added 'vgchange -ay' in
+          'Moving a volume group to another system' recipe</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 0.13</TD
+><TD
+ALIGN="LEFT"
+>2004-08-16</TD
+><TD
+ALIGN="LEFT"
+>Revised by: ajl</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Clarify symlink farm description;
+          Fix dm control device major number;
+          Remove /boot from vg in small lvm setup example;
+          Add notes about /boot and / on LVM;
+          Remove outdated link;</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 0.12</TD
+><TD
+ALIGN="LEFT"
+>2004-06-07</TD
+><TD
+ALIGN="LEFT"
+>Revised by: ajl</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Updated LVM2 FAQ entries</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 0.11</TD
+><TD
+ALIGN="LEFT"
+>2004-05-03</TD
+><TD
+ALIGN="LEFT"
+>Revised by: ajl</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Updated LVM2 FAQ entries</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 0.10</TD
+><TD
+ALIGN="LEFT"
+>2004-04-22</TD
+><TD
+ALIGN="LEFT"
+>Revised by: ajl</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>removed -print0 from find command after receiving
+            reports that it doesn't work</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 0.9</TD
+><TD
+ALIGN="LEFT"
+>2004-04-16</TD
+><TD
+ALIGN="LEFT"
+>Revised by: ajl</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Added -print0 to find command before piping
+          it to cpio;
+          Changed vgimport command line for LVM 2;
+          Added ext3 to the ext2 resize section;
+          Updated FAQ;
+          Updated Links section</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 0.8</TD
+><TD
+ALIGN="LEFT"
+>2004-02-25</TD
+><TD
+ALIGN="LEFT"
+>Revised by: ajl</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Updated CVS locations and FTP links;
+          Added section on extending a JFS filesystem;
+          Fixed typos - Ran aspell against document</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 0.7</TD
+><TD
+ALIGN="LEFT"
+>2004-02-16</TD
+><TD
+ALIGN="LEFT"
+>Revised by: ajl</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Updated to include LVM 2 and device mapper information;
+          Updated email addresses;
+          Updated copyright;
+          Added FAQ section;
+          Added document license;
+          Updated to docbook 4.2</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 0.6</TD
+><TD
+ALIGN="LEFT"
+>2003-12-09</TD
+><TD
+ALIGN="LEFT"
+>Revised by: ajl</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Updated for LVM 1.0.8;
+          fixed broken link;
+          Clarified redhat init script section;</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 0.5</TD
+><TD
+ALIGN="LEFT"
+>2003-02-10</TD
+><TD
+ALIGN="LEFT"
+>Revised by: ajl</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Updated Redhat initscript information for 7.0 and above;
+          Added information on removing a partition table from a
+          disk if pvcreate fails;
+          Default PE size is 32MB now;
+          Updated method for snapshotting under XFS.</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 0.4</TD
+><TD
+ALIGN="LEFT"
+>2002-12-16</TD
+><TD
+ALIGN="LEFT"
+>Revised by: ajl</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Updated for LVM 1.0.6</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 0.3</TD
+><TD
+ALIGN="LEFT"
+>2002-09-16</TD
+><TD
+ALIGN="LEFT"
+>Revised by: ajl</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>removed example pvmove from Command Operations section - we now
+          just point to the more detailed recipe on pvmove that contains
+          various warnings and such</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 0.2</TD
+><TD
+ALIGN="LEFT"
+>2002-09-11</TD
+><TD
+ALIGN="LEFT"
+>Revised by: ajl</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Updated for LVM 1.0.5 and converted to DocBook XML 4.1.2.</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 0.1</TD
+><TD
+ALIGN="LEFT"
+>2002-04-28</TD
+><TD
+ALIGN="LEFT"
+>Revised by: gf</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Initial conversion from Sistina's LaTeX source and import to
+          tLDP in LinuxDoc format.</TD
+></TR
+></TABLE
+></DIV
+><DIV
+><DIV
+CLASS="abstract"
+><A
+NAME="AEN127"
+></A
+><P
+></P
+><P
+>&#13;        This document describes how to build, install, and configure
+        LVM for Linux.  A basic description of LVM is also included.
+        This version of the HowTo is for LVM 2 with device-mapper, as
+        well as LVM 1.0.8.
+      </P
+><P
+></P
+></DIV
+></DIV
+><HR></DIV
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+><A
+HREF="intro.html"
+>Introduction</A
+></DT
+><DD
+><DL
+><DT
+>1. <A
+HREF="latest_version.html"
+>Latest Version</A
+></DT
+><DT
+>2. <A
+HREF="disclaimer.html"
+>Disclaimer</A
+></DT
+><DT
+>3. <A
+HREF="contributors.html"
+>Contributors</A
+></DT
+></DL
+></DD
+><DT
+>1. <A
+HREF="whatislvm.html"
+>What is LVM?</A
+></DT
+><DT
+>2. <A
+HREF="whatisvolman.html"
+>What is Logical Volume Management?</A
+></DT
+><DD
+><DL
+><DT
+>2.1. <A
+HREF="whywouldiwantit.html"
+>Why would I want it?</A
+></DT
+><DT
+>2.2. <A
+HREF="benefitsoflvmsmall.html"
+>Benefits of Logical Volume Management on a Small System</A
+></DT
+><DT
+>2.3. <A
+HREF="benefitsoflvmlarge.html"
+>Benefits of Logical Volume Management on a Large System</A
+></DT
+></DL
+></DD
+><DT
+>3. <A
+HREF="anatomy.html"
+>Anatomy of LVM</A
+></DT
+><DD
+><DL
+><DT
+>3.1. <A
+HREF="vg.html"
+>volume group (VG)</A
+></DT
+><DT
+>3.2. <A
+HREF="pv.html"
+>physical volume (PV)</A
+></DT
+><DT
+>3.3. <A
+HREF="lv.html"
+>logical volume (LV)</A
+></DT
+><DT
+>3.4. <A
+HREF="pe.html"
+>physical extent (PE)</A
+></DT
+><DT
+>3.5. <A
+HREF="le.html"
+>logical extent (LE)</A
+></DT
+><DT
+>3.6. <A
+HREF="tyingittogether.html"
+>Tying it all together</A
+></DT
+><DT
+>3.7. <A
+HREF="mapmode.html"
+>mapping modes (linear/striped)</A
+></DT
+><DT
+>3.8. <A
+HREF="snapshotintro.html"
+>Snapshots</A
+></DT
+></DL
+></DD
+><DT
+>4. <A
+HREF="faq.html"
+>Frequently Asked Questions</A
+></DT
+><DD
+><DL
+><DT
+>4.1. <A
+HREF="lvm2faq.html"
+>LVM 2 FAQ</A
+></DT
+><DT
+>4.2. <A
+HREF="lvm1faq.html"
+>LVM 1 FAQ</A
+></DT
+></DL
+></DD
+><DT
+>5. <A
+HREF="getlvm.html"
+>Acquiring LVM</A
+></DT
+><DD
+><DL
+><DT
+>5.1. <A
+HREF="downloadsource.html"
+>Download the source</A
+></DT
+><DT
+>5.2. <A
+HREF="publiccvs.html"
+>Download the development source via CVS</A
+></DT
+><DT
+>5.3. <A
+HREF="beforebeginning.html"
+>Before You Begin</A
+></DT
+><DT
+>5.4. <A
+HREF="initsetup.html"
+>Initial Setup</A
+></DT
+><DT
+>5.5. <A
+HREF="checkoutsource.html"
+>Checking Out Source Code</A
+></DT
+><DT
+>5.6. <A
+HREF="codeupdate.html"
+>Code Updates</A
+></DT
+><DT
+>5.7. <A
+HREF="startproj.html"
+>Starting a Project</A
+></DT
+><DT
+>5.8. <A
+HREF="hackingcode.html"
+>Hacking the Code</A
+></DT
+><DT
+>5.9. <A
+HREF="conflicts.html"
+>Conflicts</A
+></DT
+></DL
+></DD
+><DT
+>6. <A
+HREF="buildkernelmods.html"
+>Building the kernel modules</A
+></DT
+><DD
+><DL
+><DT
+>6.1. <A
+HREF="builddmmod.html"
+>Building the device-mapper module</A
+></DT
+><DT
+>6.2. <A
+HREF="buildlvmmod.html"
+>Build the LVM 1 kernel module</A
+></DT
+></DL
+></DD
+><DT
+>7. <A
+HREF="boot_scripts.html"
+>LVM 1 Boot time scripts</A
+></DT
+><DD
+><DL
+><DT
+>7.1. <A
+HREF="initscriptcaldera.html"
+>Caldera</A
+></DT
+><DT
+>7.2. <A
+HREF="initscriptdebian.html"
+>Debian</A
+></DT
+><DT
+>7.3. <A
+HREF="initscriptmandrake.html"
+>Mandrake</A
+></DT
+><DT
+>7.4. <A
+HREF="initscriptredhat.html"
+>Redhat</A
+></DT
+><DT
+>7.5. <A
+HREF="initscriptslackware.html"
+>Slackware</A
+></DT
+><DT
+>7.6. <A
+HREF="initscriptsuse.html"
+>SuSE</A
+></DT
+></DL
+></DD
+><DT
+>8. <A
+HREF="lvm2_boot.html"
+>LVM 2 Boot Time Scripts</A
+></DT
+><DT
+>9. <A
+HREF="buildlvm.html"
+>Building LVM from the Source</A
+></DT
+><DD
+><DL
+><DT
+>9.1. <A
+HREF="makelvm1user.html"
+>Make LVM library and tools</A
+></DT
+><DT
+>9.2. <A
+HREF="installlvm1user.html"
+>Install LVM library and tools</A
+></DT
+><DT
+>9.3. <A
+HREF="removelvm1user.html"
+>Removing LVM library and tools</A
+></DT
+></DL
+></DD
+><DT
+>10. <A
+HREF="trans1.html"
+>Transitioning from previous versions of LVM to LVM 1.0.8</A
+></DT
+><DD
+><DL
+><DT
+>10.1. <A
+HREF="upgradelvm1.html"
+>Upgrading to LVM 1.0.8 with a non-LVM root partition</A
+></DT
+><DT
+>10.2. <A
+HREF="upgradetolvmroot.html"
+>Upgrading to LVM 1.0.8 with an LVM root partition and initrd</A
+></DT
+></DL
+></DD
+><DT
+>11. <A
+HREF="commontask.html"
+>Common Tasks</A
+></DT
+><DD
+><DL
+><DT
+>11.1. <A
+HREF="initdisks.html"
+>Initializing disks or disk partitions</A
+></DT
+><DT
+>11.2. <A
+HREF="createvgs.html"
+>Creating a volume group</A
+></DT
+><DT
+>11.3. <A
+HREF="activatevgs.html"
+>Activating a volume group</A
+></DT
+><DT
+>11.4. <A
+HREF="removevgs.html"
+>Removing a volume group</A
+></DT
+><DT
+>11.5. <A
+HREF="addpvstovg.html"
+>Adding physical volumes to a volume group</A
+></DT
+><DT
+>11.6. <A
+HREF="removepvsfromvg.html"
+>Removing physical volumes from a volume group</A
+></DT
+><DT
+>11.7. <A
+HREF="createlv.html"
+>Creating a logical volume</A
+></DT
+><DT
+>11.8. <A
+HREF="removelv.html"
+>Removing a logical volume</A
+></DT
+><DT
+>11.9. <A
+HREF="extendlv.html"
+>Extending a logical volume</A
+></DT
+><DT
+>11.10. <A
+HREF="reducelv.html"
+>Reducing a logical volume</A
+></DT
+><DT
+>11.11. <A
+HREF="migrateoffpv.html"
+>Migrating data off of a physical volume</A
+></DT
+></DL
+></DD
+><DT
+>12. <A
+HREF="diskpart.html"
+>Disk partitioning</A
+></DT
+><DD
+><DL
+><DT
+>12.1. <A
+HREF="multpartitions.html"
+>Multiple partitions on the same disk</A
+></DT
+><DT
+>12.2. <A
+HREF="sundisklabels.html"
+>Sun disk labels</A
+></DT
+></DL
+></DD
+><DT
+>13. <A
+HREF="recipes.html"
+>Recipes</A
+></DT
+><DD
+><DL
+><DT
+>13.1. <A
+HREF="recipethreescsi.html"
+>Setting up LVM on three SCSI disks</A
+></DT
+><DT
+>13.2. <A
+HREF="recipethreescsistripe.html"
+>Setting up LVM on three SCSI disks with striping</A
+></DT
+><DT
+>13.3. <A
+HREF="recipeadddisk.html"
+>Add a new disk to a multi-disk SCSI system</A
+></DT
+><DT
+>13.4. <A
+HREF="snapshots_backup.html"
+>Taking a Backup Using Snapshots</A
+></DT
+><DT
+>13.5. <A
+HREF="removeadisk.html"
+>Removing an Old Disk</A
+></DT
+><DT
+>13.6. <A
+HREF="recipemovevgtonewsys.html"
+>Moving a volume group to another system</A
+></DT
+><DT
+>13.7. <A
+HREF="recipesplitvg.html"
+>Splitting a volume group</A
+></DT
+><DT
+>13.8. <A
+HREF="upgraderoottolvm.html"
+>Converting a root filesystem to
+        LVM 1</A
+></DT
+><DT
+>13.9. <A
+HREF="recovermetadata.html"
+>Recover physical volume metadata</A
+></DT
+></DL
+></DD
+><DT
+>A. <A
+HREF="dangerousops.html"
+>Dangerous Operations</A
+></DT
+><DD
+><DL
+><DT
+>A.1. <A
+HREF="uuidfixer.html"
+>Restoring the VG UUIDs using uuid_fixer</A
+></DT
+><DT
+>A.2. <A
+HREF="sharinglvm1.html"
+>Sharing LVM volumes</A
+></DT
+></DL
+></DD
+><DT
+>B. <A
+HREF="reportbug.html"
+>Reporting Errors and Bugs</A
+></DT
+><DT
+>C. <A
+HREF="contactsandlinks.html"
+>Contact and Links</A
+></DT
+><DD
+><DL
+><DT
+>C.1. <A
+HREF="maillists.html"
+>Mail lists</A
+></DT
+><DT
+>C.2. <A
+HREF="links.html"
+>Links</A
+></DT
+></DL
+></DD
+><DT
+>D. <A
+HREF="gfdl.html"
+>GNU Free Documentation License</A
+></DT
+><DD
+><DL
+><DT
+>D.1. <A
+HREF="gfdl-0.html"
+>PREAMBLE</A
+></DT
+><DT
+>D.2. <A
+HREF="gfdl-1.html"
+>APPLICABILITY AND DEFINITIONS</A
+></DT
+><DT
+>D.3. <A
+HREF="gfdl-2.html"
+>VERBATIM COPYING</A
+></DT
+><DT
+>D.4. <A
+HREF="gfdl-3.html"
+>COPYING IN QUANTITY</A
+></DT
+><DT
+>D.5. <A
+HREF="gfdl-4.html"
+>MODIFICATIONS</A
+></DT
+><DT
+>D.6. <A
+HREF="gfdl-5.html"
+>COMBINING DOCUMENTS</A
+></DT
+><DT
+>D.7. <A
+HREF="gfdl-6.html"
+>COLLECTIONS OF DOCUMENTS</A
+></DT
+><DT
+>D.8. <A
+HREF="gfdl-7.html"
+>AGGREGATION WITH INDEPENDENT WORKS</A
+></DT
+><DT
+>D.9. <A
+HREF="gfdl-8.html"
+>TRANSLATION</A
+></DT
+><DT
+>D.10. <A
+HREF="gfdl-9.html"
+>TERMINATION</A
+></DT
+><DT
+>D.11. <A
+HREF="gfdl-10.html"
+>FUTURE REVISIONS OF THIS LICENSE</A
+></DT
+><DT
+>D.12. <A
+HREF="gfdl-addendum.html"
+>ADDENDUM: How to use this License for
+        your documents</A
+></DT
+></DL
+></DD
+></DL
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="intro.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Introduction</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>
